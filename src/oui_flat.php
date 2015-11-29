@@ -74,7 +74,75 @@ if (0) {
 ?>
 # --- BEGIN PLUGIN HELP ---
 
-h1. Textile-formatted help goes here
+h1. oui_flat
+
+This plugin makes your "Textpattern CMS":http://www.textpattern.com database more flat, manageable and editable. Edit templates, forms, pages, preferences, variables and sections as flat files. Use any editor, work in teams and store your website's source under your favorite "version control system":http://en.wikipedia.org/wiki/Revision_control.
+
+*Warning: this plugin will permanently remove your current templates when activated.*
+
+h2. Installing
+
+"download":https://github.com/gocom/NicolasGraph/oui_flat the plugin, paste it under the textpattern plugin tab, and upload it.
+
+h2. Basics
+
+oui_flat imports normal, flat files from a specified directory to your Textpattern database. This, in essence, lets you to edit your database contents from any regular editor and store the source as flat files.
+
+oui_flat comes with built-in support for a few essential content types: variables (via custom prefs), styles, forms, pages, preferences and sections. See the "templates":https://github.com/gocom/oui_flat/tree/master/templates directory on GitHub for an example how this all works.
+
+Your flat files are imported to the database:
+
+* Automatically on the background when the site is either in Debugging or Testing mode ^1^.
+* When the public callback hook URL is accessed. The URL can be used for deployment.
+
+1. Variables are imported only once to avoid the override of user strings. To update them, remove or rename .json files and refresh. 
+
+If you want to exclude a certain content type from importing, just don't create a directory for it. No directory, and oui_flat will leave the database alone when it comes to that content type.
+
+h2. Preferences
+
+The plugin has set of preferences you can find on Textpattern's normal preferences panel.
+
+h3. Path to the templates directory
+
+Specifies path to the root templates directory containing all the content-type specific directories. This path is relative to your 'textpattern' installation directory. For example, a path @../themes/my_theme@ would point to a directory located in the same directory as your _textpattern_ directory and the main _index.php_ file.
+
+h3. Security key for the public callback
+
+Security key for the public callback hook URL. Importing is done when the URL is accessed. The URL follows the format of:
+
+bc. http://example.com/?oui_flat_key={yourKey}
+
+Where @http://example.com/@ is your site's URL, and @{yourKey}@ is the security key you specified.
+
+h2. Toolshed notice
+
+This is a toolshed project. Experimental and not part of the main supported product line of oui. Not yet at least. Please use at your own risk.
+
+h2. Changelog
+
+h4. Version 0.4.0 - 2015/11/29
+
+* Added: Custom preferences can be created and use as txp:variables.
+* Changed: Forms naming convention.
+
+h3. Version 0.3.0 (rah_flat) - 2014/03/28
+
+* Added: Drop access to a admin-side panel only if the specific content-type is active and has a directory set up.
+* Added: Invokable @oui_flat.import@ callback event.
+* Added: Sections and preferences get their names from the filename.
+* Added: Preferences are always just updated, no strands are created.
+* Added: Preference fields that are not specified in a file are kept as-is in the database.
+* Added: French translation by "Patrick Lefevre":https://github.com/cara-tm.
+* Changed: Renamed confusing @oui_Flat_Import_Template@ interface to @oui_Flat_Import_ImportInterface@.
+
+h3. Version 0.2.0 (rah_flat) - 2014/03/19
+
+* Reworked.
+
+h3. Version 0.1.0 (rah_flat) - 2013/05/07
+
+* Initial release.
 
 # --- END PLUGIN HELP ---
 <?php
